@@ -81,5 +81,12 @@ enum States
         {
             await setPhotoAsync(chatId, photoId, (int)States.Menu);
         }
+        public async Task SetStateAsync(long chatId, int stateId)
+        {
+            var user = _userRepository.GetFirstByExpression(u => u.TelegramId == chatId);
+            user.StateId = stateId;
+            _userRepository.Update(user);
+            await _userRepository.SaveAsync();
+        }
     }
 }
