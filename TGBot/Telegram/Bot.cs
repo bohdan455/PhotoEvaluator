@@ -16,22 +16,18 @@ namespace TGBot.Telegram
 {
     public class Bot
     {
-        private readonly ILogger<Bot> _logger;
-
-        public Bot(ILogger<Bot> logger)
-        {
-            _logger = logger;
-        }
         public void StartReceivingUpdates()
         {
             var botClient = new TelegramBotClient(TelegramSettings.Token);
 
             using CancellationTokenSource cts = new();
 
-            // StartReceiving does not block the caller thread. Receiving is done on the ThreadPool.
             ReceiverOptions receiverOptions = new()
             {
-                AllowedUpdates = Array.Empty<UpdateType>() // receive all update types except ChatMember related updates
+                AllowedUpdates = new UpdateType[] 
+                {
+                    UpdateType.Message
+                } 
             };
 
             botClient.StartReceiving(
@@ -42,13 +38,7 @@ namespace TGBot.Telegram
             );
             async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
             {
-                // Only process Message updates: https://core.telegram.org/bots/api#message
-                if (update.Message is not { } message)
-                    return;
-                // Only process text messages
-                if (message.Text is not { } messageText)
-                    return;
-                _logger.LogInformation(messageText);
+                var chatId = update.Message.Chat.Id;
             }
 
             Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
