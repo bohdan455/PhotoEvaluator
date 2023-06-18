@@ -33,12 +33,12 @@ namespace DataAccess.Repositories.Realizations.Base
         {
             return GetQuery(includes: includes);
         }
-        public IQueryable<T> GetByExpression(Expression<Func<T, bool>>? filter = null,
+        public IQueryable<T> GetByExpression(Expression<Func<T, bool>> filter,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? includes = null)
         {
             return GetQuery(filter: filter, includes: includes);
         }
-        public T? GetFirstByExpression(Expression<Func<T, bool>>? filter = null,
+        public T? GetFirstByExpression(Expression<Func<T, bool>> filter,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? includes = null)
         {
             return GetQuery(filter: filter, includes: includes).FirstOrDefault();
