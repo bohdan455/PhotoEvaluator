@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DataAccess.Repositories.Interfaces;
+using DataAccess.Repositories.Realizations.Main;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,8 @@ namespace TGBot.Extensions
         }
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
+            services.AddTransient<IRatingRepository, RatingRepository>();
+            services.AddTransient<ITelegramUserRepository, TelegramUserRepository>();
             return services;
         }
     }
