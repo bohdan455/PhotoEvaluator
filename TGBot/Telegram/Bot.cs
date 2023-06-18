@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using BLL.Services.Interfaces;
+using Microsoft.Extensions.Logging;
 using Resources;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,12 @@ namespace TGBot.Telegram
 {
     public class Bot
     {
+        private readonly ITelegramUserService _telegramUserService;
+
+        public Bot(ITelegramUserService telegramUserService)
+        {
+            _telegramUserService = telegramUserService;
+        }
         public void StartReceivingUpdates()
         {
             var botClient = new TelegramBotClient(TelegramSettings.Token);
@@ -39,6 +46,7 @@ namespace TGBot.Telegram
             async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
             {
                 var chatId = update.Message.Chat.Id;
+                await _telegramUserService.CreateAsync(chatId);
             }
 
             Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)

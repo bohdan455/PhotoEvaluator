@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities;
 using DataAccess.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DataAccess
 {
@@ -17,6 +18,9 @@ namespace DataAccess
             modelBuilder.Entity<Rating>()
                 .HasIndex(r => new { r.Id, r.TelegramUserId })
                 .IsUnique();
+            modelBuilder.Entity<TelegramUser>()
+                .Property(et => et.TelegramId)
+                .ValueGeneratedNever();
         }
     }
 }

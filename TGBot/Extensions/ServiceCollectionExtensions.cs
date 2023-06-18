@@ -1,4 +1,6 @@
-﻿using DataAccess.Repositories.Interfaces;
+﻿using BLL.Services;
+using BLL.Services.Interfaces;
+using DataAccess.Repositories.Interfaces;
 using DataAccess.Repositories.Realizations.Main;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,6 +15,8 @@ namespace TGBot.Extensions
     {
         public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
+            services.AddTransient<ITelegramUserService,TelegramUserService>();
+
             return services;
         }
         public static IServiceCollection AddRepositories(this IServiceCollection services)

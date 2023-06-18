@@ -25,8 +25,7 @@ namespace DataAccess.Migrations
                 name: "TelegramUser",
                 columns: table => new
                 {
-                    TelegramId = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TelegramId = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
                     PhotoId = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),

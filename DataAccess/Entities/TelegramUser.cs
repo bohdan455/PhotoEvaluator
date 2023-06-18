@@ -19,5 +19,7 @@ namespace DataAccess.Entities
         public ICollection<Rating> Ratings { get; set; }
         [Required]
         public ChatState State { get; set; }
+        [Required]
+        public int StateId { get; set; }
     }
 }

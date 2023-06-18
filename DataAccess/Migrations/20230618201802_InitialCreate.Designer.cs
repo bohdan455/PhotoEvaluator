@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(PhotoEvaluatorContext))]
-    [Migration("20230618182325_InitialCreate")]
+    [Migration("20230618201802_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,10 +110,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entities.TelegramUser", b =>
                 {
                     b.Property<long>("TelegramId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("TelegramId"), 1L, 1);
 
                     b.Property<int>("Age")
                         .HasColumnType("int");

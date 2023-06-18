@@ -108,10 +108,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("DataAccess.Entities.TelegramUser", b =>
                 {
                     b.Property<long>("TelegramId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("TelegramId"), 1L, 1);
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
