@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TGBot.Middleware;
+using TGBot.Middleware.Interfaces;
 
 namespace TGBot.Extensions
 {
@@ -24,6 +26,11 @@ namespace TGBot.Extensions
         {
             services.AddTransient<IRatingRepository, RatingRepository>();
             services.AddTransient<ITelegramUserRepository, TelegramUserRepository>();
+            return services;
+        }
+        public static IServiceCollection AddMiddleware(this IServiceCollection services)
+        {
+            services.AddTransient<IMiddlewares,Middlewares>();
             return services;
         }
     }

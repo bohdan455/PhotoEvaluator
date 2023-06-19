@@ -12,16 +12,22 @@ using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using TGBot.Middleware.Interfaces;
+using TGBot.Stages;
+using TGBot.Stages.Interfaces;
+using TGBot.Stages.StageTypes;
 
 namespace TGBot.Telegram
 {
     public class Bot
     {
-        private readonly ITelegramUserService _telegramUserService;
+        private readonly IMiddlewares _middleware;
+        private readonly IChatStage _chatStage;
 
-        public Bot(ITelegramUserService telegramUserService)
-        {
-            _telegramUserService = telegramUserService;
+        public Bot(IMiddlewares middleware,IChatStage chatStage)
+        {;
+            _middleware = middleware;
+            _chatStage = chatStage;
         }
         public void StartReceivingUpdates()
         {
@@ -46,7 +52,8 @@ namespace TGBot.Telegram
             async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
             {
                 var chatId = update.Message.Chat.Id;
-                await _telegramUserService.CreateAsync(chatId);
+                await _middleware.EvaluateStage(chatId);
+                await _chatStage.HandleAsync(botClient,update);
             }
 
             Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
