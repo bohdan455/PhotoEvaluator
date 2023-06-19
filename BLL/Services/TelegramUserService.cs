@@ -2,6 +2,7 @@
 using BLL.Services.Interfaces;
 using DataAccess.Entities;
 using DataAccess.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL.Services
 {
@@ -70,6 +71,17 @@ namespace BLL.Services
             user.StateId = stateId;
             _userRepository.Update(user);
             await _userRepository.SaveAsync();
+        }
+        public TelegramUser? GetById(long chatId)
+        {
+            var user = _userRepository.GetFirstByExpression(u => u.TelegramId == chatId,includes: ur => ur.Include(u => u.Ratings));
+            return user;
+        }
+        public TelegramUser? GetNextUserToVoteById(long chatId)
+        {
+            var user = _userRepository.
+                GetFirstByExpression(u => u.TelegramId == chatId, includes: ur => ur.Include(u => u.NextUserToRate).ThenInclude(u => u.Ratings))?.NextUserToRate;
+            return user;
         }
     }
 }

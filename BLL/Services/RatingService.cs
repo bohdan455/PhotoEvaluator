@@ -20,7 +20,7 @@ namespace BLL.Services
         /// <param name="raterId"></param>
         /// <param name="userToRate"></param>
         /// <param name="value"></param>
-        /// <returns></returns>
+        /// <returns>Return id of next user to rate</returns>
         public async Task<long?> Rate(long raterId, long userToRate, int value)
         {
             var newRating = new Rating
