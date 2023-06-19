@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +12,13 @@ namespace DataAccess.Entities
     {
         [Key]
         public int Id { get; set; }
-        public TelegramUser User { get; set; }
+        public long UserToRateId { get; set; }
+        public TelegramUser Rator { get; set; }
         [Required]
-        public long TelegramUserId { get; set; }
+        [ForeignKey("Rator")]
+        public long RaterId { get; set; }
         [Required]
         public int RatingNumber { get; set; }
-        //TODO add isChecked
+        public bool IsChecked { get; set; }
     }
 }

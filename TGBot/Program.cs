@@ -10,7 +10,7 @@ using TGBot.Telegram;
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
-        services.AddSingleton<Bot>();
+        services.AddTransient<Bot>();
         services.AddDbContext<PhotoEvaluatorContext>(options =>
         {
             options.UseSqlServer(DataBaseSettings.ConnectionString);

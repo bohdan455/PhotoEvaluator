@@ -16,7 +16,7 @@ namespace DataAccess
             base.OnModelCreating(modelBuilder);
             modelBuilder.EnsureHavingChatStates();
             modelBuilder.Entity<Rating>()
-                .HasIndex(r => new { r.Id, r.TelegramUserId })
+                .HasIndex(r => new { r.RaterId, r.UserToRateId})
                 .IsUnique();
             modelBuilder.Entity<TelegramUser>()
                 .Property(et => et.TelegramId)
