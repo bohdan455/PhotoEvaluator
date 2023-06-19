@@ -80,7 +80,9 @@ namespace BLL.Services
         public TelegramUser? GetNextUserToVoteById(long chatId)
         {
             var user = _userRepository.
-                GetFirstByExpression(u => u.TelegramId == chatId, includes: ur => ur.Include(u => u.NextUserToRate).ThenInclude(u => u.Ratings))?.NextUserToRate;
+                GetFirstByExpression(u => u.TelegramId == chatId, 
+                includes: ur => ur.Include(u => u.NextUserToRate).ThenInclude(u => u.Ratings))
+                ?.NextUserToRate;
             return user;
         }
     }
