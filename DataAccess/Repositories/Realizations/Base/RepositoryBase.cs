@@ -43,6 +43,11 @@ namespace DataAccess.Repositories.Realizations.Base
         {
             return GetQuery(filter: filter, includes: includes).FirstOrDefault();
         }
+        public T? GetRandomElement(Expression<Func<T, bool>>? filter = null,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>>? includes = null)
+        {
+            return GetQuery(filter: filter, includes: includes).OrderBy(r => Guid.NewGuid()).FirstOrDefault();
+        }
         public void Add(T entity)
         {
             _context.Add(entity);

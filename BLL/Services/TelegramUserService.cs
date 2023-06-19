@@ -1,32 +1,15 @@
-﻿using DataAccess.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataAccess.Entities;
+﻿using BLL.Enums;
 using BLL.Services.Interfaces;
-using System.Xml.Linq;
+using DataAccess.Entities;
+using DataAccess.Repositories.Interfaces;
 
 namespace BLL.Services
 {
-enum States
-    {
-        SetName = 1,
-        SetAge = 2,
-        SetPhoto = 3,
-        Menu = 4,
-        Rate = 5,
-        Settings = 6,
-        ChangeName = 7,
-        ChangePhoto = 8 
-        
-    }
     public class TelegramUserService : ITelegramUserService
     {
         private readonly ITelegramUserRepository _userRepository;
 
-        private async Task setNameAsync(long chatId,string name,int? stateId = null)
+        private async Task setNameAsync(long chatId, string name, int? stateId = null)
         {
             var user = _userRepository.GetFirstByExpression(u => u.TelegramId == chatId);
             user.Name = name;
@@ -44,7 +27,7 @@ enum States
             _userRepository.Update(user);
             await _userRepository.SaveAsync();
         }
-        private async Task setPhotoAsync(long chatId,string photoId, int? stateId = null)
+        private async Task setPhotoAsync(long chatId, string photoId, int? stateId = null)
         {
             var user = _userRepository.GetFirstByExpression(u => u.TelegramId == chatId);
             user.PhotoId = photoId;
