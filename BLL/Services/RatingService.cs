@@ -4,7 +4,7 @@ using DataAccess.Repositories.Interfaces;
 
 namespace BLL.Services
 {
-    public class RatingService
+    public class RatingService : IRatingService
     {
         private readonly ITelegramUserRepository _userRepository;
         private readonly ISearchAlghorithmService _searchAlghorithmService;

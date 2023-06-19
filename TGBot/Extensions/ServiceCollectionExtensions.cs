@@ -17,6 +17,7 @@ namespace TGBot.Extensions
         {
             services.AddTransient<ITelegramUserService,TelegramUserService>();
             services.AddTransient<ISearchAlghorithmService,SearchAlghorithmService>();
+            services.AddTransient<IRatingService,RatingService>();
             return services;
         }
         public static IServiceCollection AddRepositories(this IServiceCollection services)
