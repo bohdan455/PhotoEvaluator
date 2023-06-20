@@ -35,7 +35,7 @@ namespace BLL.Services
             await _userRepository.SaveAsync();
             var rator = _userRepository.GetFirstByExpression(u => u.TelegramId == raterId);
             var nextUserToRate = _searchAlghorithmService.GetNextUserIdToRate(raterId);
-            rator.NextUserToRateId = nextUserToRate ?? 0;
+            rator.NextUserToRateId = nextUserToRate;
             await _userRepository.SaveAsync();
             return nextUserToRate;
         }

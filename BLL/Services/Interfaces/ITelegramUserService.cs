@@ -10,6 +10,7 @@ namespace BLL.Services.Interfaces
         Task CreateAsync(long chatId);
         TelegramUser? GetById(long chatId);
         TelegramUser? GetNextUserToVoteById(long chatId);
+        int GetStage(long chatId);
         Task SetStateAsync(long chatId, int stateId);
     }
 }

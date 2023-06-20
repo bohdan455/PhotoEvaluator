@@ -13,18 +13,18 @@ namespace DataAccess.Entities
         [Key]
         public long TelegramId { get; set; }
         [MaxLength(255)]
-        public string Name { get; set; } = string.Empty;
-        public int Age { get; set; }
+        public string? Name { get; set; } = string.Empty;
+        public int? Age { get; set; }
         [MaxLength(500)]
-        public string PhotoId { get; set; } = string.Empty;
+        public string? PhotoId { get; set; } = string.Empty;
         [ForeignKey("UserToRateId")]
-        public ICollection<Rating> Ratings { get; set; }
+        public ICollection<Rating>? Ratings { get; set; }
         [Required]
         public ChatState State { get; set; }
         [Required]
         public int StateId { get; set; }
-        public TelegramUser NextUserToRate{ get; set; }
+        public TelegramUser? NextUserToRate{ get; set; }
         [ForeignKey("NextUserToRate")]
-        public long NextUserToRateId { get; set; }
+        public long? NextUserToRateId { get; set; }
     }
 }

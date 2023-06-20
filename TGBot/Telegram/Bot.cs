@@ -23,11 +23,13 @@ namespace TGBot.Telegram
     {
         private readonly IMiddlewares _middleware;
         private readonly IChatStage _chatStage;
+        private readonly ITelegramUserService _telegramUserService;
 
-        public Bot(IMiddlewares middleware,IChatStage chatStage)
+        public Bot(IMiddlewares middleware,IChatStage chatStage,ITelegramUserService telegramUserService)
         {;
             _middleware = middleware;
             _chatStage = chatStage;
+            _telegramUserService = telegramUserService;
         }
         public void StartReceivingUpdates()
         {
@@ -51,8 +53,10 @@ namespace TGBot.Telegram
             );
             async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
             {
+                //TODO Delete it
                 var chatId = update.Message.Chat.Id;
-                await _middleware.EvaluateStage(chatId);
+                await _telegramUserService.CreateAsync(chatId);
+                _middleware.EvaluateStage(chatId);
                 await _chatStage.HandleAsync(botClient,update);
             }
 

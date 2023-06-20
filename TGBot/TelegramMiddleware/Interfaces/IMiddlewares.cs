@@ -2,6 +2,6 @@
 {
     public interface IMiddlewares
     {
-        Task EvaluateStage(long chatId);
+        void EvaluateStage(long chatId);
     }
 }

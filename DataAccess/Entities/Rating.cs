@@ -13,7 +13,7 @@ namespace DataAccess.Entities
         [Key]
         public int Id { get; set; }
         public long UserToRateId { get; set; }
-        public TelegramUser Rator { get; set; }
+        public TelegramUser Rater { get; set; }
         [Required]
         [ForeignKey("Rator")]
         public long RaterId { get; set; }

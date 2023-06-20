@@ -10,6 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TGBot.Middleware;
 using TGBot.Middleware.Interfaces;
+using TGBot.Stages;
+using TGBot.Stages.Interfaces;
+using TGBot.Stages.StageTypes;
 
 namespace TGBot.Extensions
 {
@@ -31,6 +34,19 @@ namespace TGBot.Extensions
         public static IServiceCollection AddMiddleware(this IServiceCollection services)
         {
             services.AddTransient<IMiddlewares,Middlewares>();
+            return services;
+        }
+        public static IServiceCollection AddStages(this IServiceCollection services)
+        {
+            services.AddTransient<AddAgeStage>();
+            services.AddTransient<AddNameStage>();
+            services.AddTransient<AddPhotoStage>();
+            services.AddTransient<ChangeNameStage>();
+            services.AddTransient<ChangePhotoStage>();
+            services.AddTransient<MenuStage>();
+            services.AddTransient<RateStage>();
+            services.AddTransient<SettingsStage>();
+            services.AddTransient<IStageManager, StageManager>();
             return services;
         }
     }
