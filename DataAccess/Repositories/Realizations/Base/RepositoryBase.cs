@@ -21,7 +21,7 @@ namespace DataAccess.Repositories.Realizations.Base
         public IQueryable<T> GetQuery(Expression<Func<T, bool>>? filter = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? includes = null)
         {
-            IQueryable<T> query = _context.Set<T>().AsNoTracking();
+            IQueryable<T> query = _context.Set<T>();
             if (filter is not null)
                 query = query.Where(filter);
             if (includes is not null)

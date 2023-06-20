@@ -53,9 +53,14 @@ namespace TGBot.Telegram
             );
             async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
             {
-                //TODO Delete it
                 var chatId = update.Message.Chat.Id;
-                await _telegramUserService.CreateAsync(chatId);
+                //TODO Delete it
+                if (update.Message!.Text?.Split(" ")[0] == "/start")
+                {
+                    await _telegramUserService.CreateAsync(chatId);
+                    await botClient.SendTextMessageAsync(chatId,"Введіть ваше ім'я");
+                    return;
+                }
                 _middleware.EvaluateStage(chatId);
                 await _chatStage.HandleAsync(botClient,update);
             }
