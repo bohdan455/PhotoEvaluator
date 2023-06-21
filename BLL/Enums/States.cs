@@ -9,7 +9,8 @@
         Rate = 5,
         Settings = 6,
         ChangeName = 7,
-        ChangePhoto = 8
+        ChangeAge = 8,
+        ChangePhoto = 9
 
     }
 }

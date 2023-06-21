@@ -29,7 +29,7 @@ namespace TGBot.Common
             {
                 rate = telegramUser.Ratings!.Sum(r => r.RatingNumber) / (decimal)telegramUser.Ratings.Count;
             }
-            var photoDescription = $"Ім'я: {telegramUser.Name} \n Вік: {telegramUser.Age} \n Рейтинг: {rate}";
+            var photoDescription = $"Ім'я: {telegramUser.Name} \nВік: {telegramUser.Age} \nРейтинг: {rate}";
             await botClient.SendPhotoAsync(chatId: chatId, photo: InputFile.FromFileId(telegramUser.PhotoId), caption: photoDescription);
 
         }

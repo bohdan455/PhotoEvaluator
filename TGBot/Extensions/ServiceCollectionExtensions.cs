@@ -45,6 +45,7 @@ namespace TGBot.Extensions
             services.AddTransient<AddPhotoStage>();
             services.AddTransient<ChangeNameStage>();
             services.AddTransient<ChangePhotoStage>();
+            services.AddTransient<ChangeAgeStage>();
             services.AddTransient<MenuStage>();
             services.AddTransient<RateStage>();
             services.AddTransient<SettingsStage>();

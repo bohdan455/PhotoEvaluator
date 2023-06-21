@@ -52,6 +52,11 @@ namespace DataAccess.Extensions
                 new ChatState
                 {
                     Id = 8,
+                    State = "Change age"
+                }, 
+                new ChatState
+                {
+                    Id = 9,
                     State = "Change photo"
                 });
         }

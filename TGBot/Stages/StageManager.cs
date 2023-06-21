@@ -18,6 +18,7 @@ namespace TGBot.Stages
         private readonly MenuStage _menuStage;
         private readonly RateStage _rateStage;
         private readonly SettingsStage _settingsStage;
+        private readonly ChangeAgeStage _changeAgeStage;
 
         public StageManager(AddAgeStage addAgeStage,
             AddNameStage addNameStage,
@@ -26,7 +27,8 @@ namespace TGBot.Stages
             ChangePhotoStage changePhotoStage,
             MenuStage menuStage,
             RateStage rateStage,
-            SettingsStage settingsStage)
+            SettingsStage settingsStage,
+            ChangeAgeStage changeAgeStage)
         {
             _addAgeStage = addAgeStage;
             _addNameStage = addNameStage;
@@ -36,6 +38,7 @@ namespace TGBot.Stages
             _menuStage = menuStage;
             _rateStage = rateStage;
             _settingsStage = settingsStage;
+            _changeAgeStage = changeAgeStage;
         }
         /// <summary>
         ///SetName = 1,
@@ -45,7 +48,8 @@ namespace TGBot.Stages
         ///Rate = 5,
         ///Settings = 6,
         ///ChangeName = 7,
-        ///ChangePhoto = 8
+        ///ChangeAge = 8
+        ///ChangePhoto = 9
         /// </summary>
         /// <returns></returns>
         public IStage GetStageInstance(int stageId)
@@ -59,7 +63,8 @@ namespace TGBot.Stages
                 5 => _rateStage,
                 6 => _settingsStage,
                 7 => _changeNameStage,
-                8 => _changePhotoStage,
+                8 => _changeAgeStage,
+                9 => _changePhotoStage,
                 _ => throw new InvalidDataException($"Could not find {stageId}"),
             };
         }
