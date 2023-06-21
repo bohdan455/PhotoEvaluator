@@ -55,11 +55,11 @@ namespace TGBot.Stages
                 1 => _addNameStage,
                 2 => _addAgeStage,
                 3 => _addPhotoStage,
-                4 => _changeNameStage,
-                5 => _changePhotoStage,
-                6 => _menuStage,
-                7 => _rateStage,
-                8 => _settingsStage,
+                4 => _menuStage,
+                5 => _rateStage,
+                6 => _settingsStage,
+                7 => _changeNameStage,
+                8 => _changePhotoStage,
                 _ => throw new InvalidDataException($"Could not find {stageId}"),
             };
         }

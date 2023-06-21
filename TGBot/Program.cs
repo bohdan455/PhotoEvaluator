@@ -23,6 +23,7 @@ using IHost host = Host.CreateDefaultBuilder(args)
         services.AddCustomServices();
         services.AddRepositories();
         services.AddStages();
+        services.AddCommon();
     }).Build();
 host.Services.GetService<Bot>()!.StartReceivingUpdates();
 await host.RunAsync();

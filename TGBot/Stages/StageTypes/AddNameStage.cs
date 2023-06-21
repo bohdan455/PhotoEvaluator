@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using TGBot.Common.Interfaces;
 using TGBot.Stages.Interfaces;
 
 namespace TGBot.Stages.StageTypes
@@ -13,21 +14,20 @@ namespace TGBot.Stages.StageTypes
     public class AddNameStage : IStage
     {
         private readonly ITelegramUserService _telegramUserService;
+        private readonly ITelegramValidator _validator;
 
-        public AddNameStage(ITelegramUserService telegramUserService)
+        public AddNameStage(ITelegramUserService telegramUserService,ITelegramValidator validator)
         {
             _telegramUserService = telegramUserService;
+            _validator = validator;
         }
         public async Task HandleAsync(ITelegramBotClient botClient, Update update)
         {
             var chatId = update.Message!.Chat.Id;
             var textMessage = update.Message.Text;
-            if(textMessage is null)
-            {
-                await botClient.SendTextMessageAsync(chatId, "Неправильний тип повідомлення");
-                return;
-            }
-            if(textMessage!.Length > 255)
+            if (await _validator.ValidateBotMessageTypeAsync(textMessage, botClient, chatId)) return;
+
+            if (textMessage!.Length > 255)
             {
                 await botClient.SendTextMessageAsync(chatId, "Задовге ім'я");
                 return;

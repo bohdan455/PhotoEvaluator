@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TGBot.Common;
+using TGBot.Common.Interfaces;
 using TGBot.Middleware;
 using TGBot.Middleware.Interfaces;
 using TGBot.Stages;
@@ -47,6 +49,12 @@ namespace TGBot.Extensions
             services.AddTransient<RateStage>();
             services.AddTransient<SettingsStage>();
             services.AddTransient<IStageManager, StageManager>();
+            return services;
+        }
+        public static IServiceCollection AddCommon(this IServiceCollection services)
+        {
+            services.AddSingleton<ITelegramValidator, TelegramValidator>();
+            services.AddSingleton<IUserInformation, UserInformation>();
             return services;
         }
     }
