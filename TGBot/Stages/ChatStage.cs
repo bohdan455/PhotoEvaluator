@@ -14,7 +14,8 @@ namespace TGBot.Stages
         private IStage _stage;
         public async Task HandleAsync(ITelegramBotClient botClient, Update update)
         {
-            await _stage.HandleAsync(botClient, update);
+            if(_stage !=  null) 
+                await _stage.HandleAsync(botClient, update);
         }
         public void SetStage(IStage stage)
         {

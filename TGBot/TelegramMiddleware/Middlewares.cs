@@ -27,7 +27,8 @@ namespace TGBot.Middleware
         public void EvaluateStage(long chatId)
         {
             var stageId = _telegramUserService.GetStage(chatId); 
-            _chatStage.SetStage(_stageManager.GetStageInstance(stageId));
+            if (stageId != null)
+                _chatStage.SetStage(_stageManager.GetStageInstance((int)stageId));
         }
     }
 }

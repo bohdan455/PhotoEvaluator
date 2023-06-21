@@ -72,10 +72,10 @@ namespace BLL.Services
             _userRepository.Update(user);
             await _userRepository.SaveAsync();
         }
-        public int GetStage(long chatId)
+        public int? GetStage(long chatId)
         {
             var user = _userRepository.GetFirstByExpression(u => u.TelegramId == chatId);
-            return user.StateId;
+            return user?.StateId;
         }
         public TelegramUser? GetById(long chatId)
         {
