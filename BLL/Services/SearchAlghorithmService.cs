@@ -16,7 +16,7 @@ namespace BLL.Services
         {
             var id = _userRepository
                 .GetRandomElement(
-                    filter: user => !user.Ratings.Any(r => r.RaterId == raterId),
+                    filter: user => user.TelegramId != raterId && !user.Ratings.Any(r => r.RaterId == raterId),
                     includes: ur => ur.Include(u => u.Ratings))
                 ?.TelegramId;
             return id;

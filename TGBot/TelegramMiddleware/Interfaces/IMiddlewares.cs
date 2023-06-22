@@ -1,4 +1,4 @@
-﻿namespace TGBot.Middleware.Interfaces
+﻿namespace TGBot.TelegramMiddleware.Interfaces
 {
     public interface IMiddlewares
     {

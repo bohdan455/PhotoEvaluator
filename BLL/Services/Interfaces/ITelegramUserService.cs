@@ -9,7 +9,7 @@ namespace BLL.Services.Interfaces
         Task AddPhotoAsync(long chatId, string photoId);
         Task CreateAsync(long chatId);
         TelegramUser? GetById(long chatId);
-        TelegramUser? GetNextUserToVoteById(long chatId);
+        Task<TelegramUser?> GetNextUserToVoteByIdAsync(long chatId);
         int? GetStage(long chatId);
         Task SetStateAsync(long chatId, int stateId);
     }

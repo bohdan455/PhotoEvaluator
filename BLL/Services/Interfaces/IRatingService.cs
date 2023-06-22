@@ -2,6 +2,6 @@
 {
     public interface IRatingService
     {
-        Task<long?> Rate(long raterId, long userToRate, int value);
+        Task<long?> RateAsync(long raterId, long userToRate, int value);
     }
 }

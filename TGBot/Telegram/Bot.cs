@@ -12,10 +12,10 @@ using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using TGBot.Middleware.Interfaces;
 using TGBot.Stages;
 using TGBot.Stages.Interfaces;
 using TGBot.Stages.StageTypes;
+using TGBot.TelegramMiddleware.Interfaces;
 
 namespace TGBot.Telegram
 {
@@ -26,7 +26,7 @@ namespace TGBot.Telegram
         private readonly ITelegramUserService _telegramUserService;
 
         public Bot(IMiddlewares middleware,IChatStage chatStage,ITelegramUserService telegramUserService)
-        {;
+        {
             _middleware = middleware;
             _chatStage = chatStage;
             _telegramUserService = telegramUserService;

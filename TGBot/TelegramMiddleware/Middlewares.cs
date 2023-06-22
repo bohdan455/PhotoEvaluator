@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
-using TGBot.Middleware.Interfaces;
 using TGBot.Stages.Interfaces;
 using TGBot.Stages.StageTypes;
+using TGBot.TelegramMiddleware.Interfaces;
 
-namespace TGBot.Middleware
+namespace TGBot.TelegramMiddleware
 {
     public class Middlewares : IMiddlewares
     {
@@ -18,7 +18,7 @@ namespace TGBot.Middleware
         private readonly ITelegramUserService _telegramUserService;
         private readonly IStageManager _stageManager;
 
-        public Middlewares(IChatStage chatStage,ITelegramUserService telegramUserService,IStageManager stageManager)
+        public Middlewares(IChatStage chatStage, ITelegramUserService telegramUserService, IStageManager stageManager)
         {
             _chatStage = chatStage;
             _telegramUserService = telegramUserService;
@@ -26,7 +26,7 @@ namespace TGBot.Middleware
         }
         public void EvaluateStage(long chatId)
         {
-            var stageId = _telegramUserService.GetStage(chatId); 
+            var stageId = _telegramUserService.GetStage(chatId);
             if (stageId != null)
                 _chatStage.SetStage(_stageManager.GetStageInstance((int)stageId));
         }

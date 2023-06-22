@@ -13,8 +13,17 @@ namespace TGBot.Buttons
             ResizeKeyboard = true
         };
         public static ReplyKeyboardMarkup Back { get; set; } = new(new[]
+        {
+            new KeyboardButton[]{"Назад"}
+        })
+        {
+            ResizeKeyboard = true
+        };
+        public static ReplyKeyboardMarkup RateButtons { get; set; } = new(new[]
 {
-            new KeyboardButton[]{ "Назад"}
+            new KeyboardButton[]{"1","2","3","4","5"},
+            new KeyboardButton[]{"6","7","8","9","10"},
+            new KeyboardButton[]{"Вернутись"}
         })
         {
             ResizeKeyboard = true

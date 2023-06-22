@@ -9,6 +9,7 @@ namespace BLL.Services
     public class TelegramUserService : ITelegramUserService
     {
         private readonly ITelegramUserRepository _userRepository;
+        private readonly ISearchAlghorithmService _searchAlghorithmService;
 
         private async Task setNameAsync(long chatId, string name, int? stateId = null)
         {
@@ -37,9 +38,10 @@ namespace BLL.Services
             _userRepository.Update(user);
             await _userRepository.SaveAsync();
         }
-        public TelegramUserService(ITelegramUserRepository userRepository)
+        public TelegramUserService(ITelegramUserRepository userRepository,ISearchAlghorithmService searchAlghorithmService)
         {
             _userRepository = userRepository;
+            _searchAlghorithmService = searchAlghorithmService;
         }
         public async Task CreateAsync(long chatId)
         {
@@ -48,22 +50,22 @@ namespace BLL.Services
                 _userRepository.Add(new TelegramUser
                 {
                     TelegramId = chatId,
-                    StateId = (int)States.SetName
+                    StateId = (int)ChatStages.SetName
                 });
                 await _userRepository.SaveAsync();
             }
         }
         public async Task AddNameAsync(long chatId, string name)
         {
-            await setNameAsync(chatId, name, (int)States.SetAge);
+            await setNameAsync(chatId, name, (int)ChatStages.SetAge);
         }
         public async Task AddAgeAsync(long chatId, int age)
         {
-            await setAgeAsync(chatId, age, (int)States.SetPhoto);
+            await setAgeAsync(chatId, age, (int)ChatStages.SetPhoto);
         }
         public async Task AddPhotoAsync(long chatId, string photoId)
         {
-            await setPhotoAsync(chatId, photoId, (int)States.Menu);
+            await setPhotoAsync(chatId, photoId, (int)ChatStages.Menu);
         }
         public async Task SetStateAsync(long chatId, int stateId)
         {
@@ -82,13 +84,18 @@ namespace BLL.Services
             var user = _userRepository.GetFirstByExpression(u => u.TelegramId == chatId,includes: ur => ur.Include(u => u.Ratings));
             return user;
         }
-        public TelegramUser? GetNextUserToVoteById(long chatId)
+        public async Task<TelegramUser?> GetNextUserToVoteByIdAsync(long chatId)
         {
             var user = _userRepository.
-                GetFirstByExpression(u => u.TelegramId == chatId, 
-                includes: ur => ur.Include(u => u.NextUserToRate).ThenInclude(u => u.Ratings))
-                ?.NextUserToRate;
-            return user;
+                GetFirstByExpression(u => u.TelegramId == chatId,
+                includes: ur => ur.Include(u => u.NextUserToRate).ThenInclude(u => u.Ratings));
+            if(user!.NextUserToRate == null)
+            {
+                user.NextUserToRateId = _searchAlghorithmService.GetNextUserIdToRate(chatId);
+                await _userRepository.SaveAsync();
+            }
+
+            return user.NextUserToRate;
         }
     }
 }

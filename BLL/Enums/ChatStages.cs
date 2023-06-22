@@ -1,6 +1,6 @@
 ﻿namespace BLL.Enums
 {
-    enum States
+    public enum ChatStages
     {
         SetName = 1,
         SetAge = 2,

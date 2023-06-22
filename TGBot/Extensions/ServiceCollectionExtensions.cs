@@ -10,11 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 using TGBot.Common;
 using TGBot.Common.Interfaces;
-using TGBot.Middleware;
-using TGBot.Middleware.Interfaces;
 using TGBot.Stages;
 using TGBot.Stages.Interfaces;
 using TGBot.Stages.StageTypes;
+using TGBot.TelegramMiddleware;
+using TGBot.TelegramMiddleware.Interfaces;
 
 namespace TGBot.Extensions
 {

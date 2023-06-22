@@ -5,6 +5,6 @@ namespace TGBot.Common.Interfaces
 {
     public interface IUserInformation
     {
-        Task Send(ITelegramBotClient botClient, TelegramUser? telegramUser, long chatId);
+        Task SendAsync(ITelegramBotClient botClient, TelegramUser? telegramUser, long chatId);
     }
 }

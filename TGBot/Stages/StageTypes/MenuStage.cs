@@ -10,6 +10,9 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 using TGBot.Common.Interfaces;
 using TGBot.Stages.Interfaces;
+using BLL.Enums;
+using DataAccess.Entities;
+using TGBot.Buttons;
 
 namespace TGBot.Stages.StageTypes
 {
@@ -18,12 +21,17 @@ namespace TGBot.Stages.StageTypes
         private readonly ITelegramUserService _telegramUserService;
         private readonly ITelegramValidator _validator;
         private readonly IUserInformation _userInformation;
+        private readonly RateStage _rateStage;
 
-        public MenuStage(ITelegramUserService telegramUserService,ITelegramValidator validator, IUserInformation userInformation)
+        public MenuStage(ITelegramUserService telegramUserService,
+            ITelegramValidator validator,
+            IUserInformation userInformation,
+            RateStage rateStage)
         {
             _telegramUserService = telegramUserService;
             _validator = validator;
             _userInformation = userInformation;
+            _rateStage = rateStage;
         }
         public async Task HandleAsync(ITelegramBotClient botClient, Update update)
         {
@@ -34,9 +42,12 @@ namespace TGBot.Stages.StageTypes
             {
                 case "Мій профіль":
                     var user = _telegramUserService.GetById(chatId);
-                    await _userInformation.Send(botClient, user,chatId);
+                    await _userInformation.SendAsync(botClient, user,chatId);
                     break;
                 case "Оцінювати":
+                    await _telegramUserService.SetStateAsync(chatId,(int)ChatStages.Rate);
+                    await botClient.SendTextMessageAsync(chatId, "Пошук", replyMarkup: Keyboards.RateButtons);
+                    await _rateStage.HandleAsync(botClient, update);
                     break;
                 case "Налаштування":
                     break;

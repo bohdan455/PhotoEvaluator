@@ -13,7 +13,7 @@ namespace TGBot.Common
     public class UserInformation : IUserInformation
     {
 
-        public async Task Send(ITelegramBotClient botClient, TelegramUser? telegramUser, long chatId)
+        public async Task SendAsync(ITelegramBotClient botClient, TelegramUser? telegramUser, long chatId)
         {
             if (telegramUser == null)
             {
@@ -29,7 +29,7 @@ namespace TGBot.Common
             {
                 rate = telegramUser.Ratings!.Sum(r => r.RatingNumber) / (decimal)telegramUser.Ratings.Count;
             }
-            var photoDescription = $"Ім'я: {telegramUser.Name} \nВік: {telegramUser.Age} \nРейтинг: {rate}";
+            var photoDescription = $"Ім'я: {telegramUser.Name} \nВік: {telegramUser.Age} \nРейтинг: {rate}\\10";
             await botClient.SendPhotoAsync(chatId: chatId, photo: InputFile.FromFileId(telegramUser.PhotoId), caption: photoDescription);
 
         }
