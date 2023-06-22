@@ -50,6 +50,8 @@ namespace TGBot.Stages.StageTypes
                     await _rateStage.HandleAsync(botClient, update);
                     break;
                 case "Налаштування":
+                    await _telegramUserService.SetStateAsync(chatId, (int)ChatStages.Settings);
+                    await botClient.SendTextMessageAsync(chatId, "Налаштування", replyMarkup: Keyboards.SettingButtons);
                     break;
                 default:
                     await botClient.SendTextMessageAsync(chatId, "Невідома команда");

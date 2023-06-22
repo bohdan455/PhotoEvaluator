@@ -14,15 +14,24 @@ namespace TGBot.Buttons
         };
         public static ReplyKeyboardMarkup Back { get; set; } = new(new[]
         {
-            new KeyboardButton[]{"Назад"}
+            new KeyboardButton[]{ "Вернутись" }
         })
         {
             ResizeKeyboard = true
         };
         public static ReplyKeyboardMarkup RateButtons { get; set; } = new(new[]
-{
+        {
             new KeyboardButton[]{"1","2","3","4","5"},
             new KeyboardButton[]{"6","7","8","9","10"},
+            new KeyboardButton[]{"Вернутись"}
+        })
+        {
+            ResizeKeyboard = true
+        };
+        public static ReplyKeyboardMarkup SettingButtons { get; set; } = new(new[]
+{
+            new KeyboardButton[]{"Поміняти вік","Поміняти ім'я"},
+            new KeyboardButton[]{"Поміняти фотографію"},
             new KeyboardButton[]{"Вернутись"}
         })
         {

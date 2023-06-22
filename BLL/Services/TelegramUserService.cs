@@ -55,18 +55,13 @@ namespace BLL.Services
                 await _userRepository.SaveAsync();
             }
         }
-        public async Task AddNameAsync(long chatId, string name)
-        {
-            await setNameAsync(chatId, name, (int)ChatStages.SetAge);
-        }
-        public async Task AddAgeAsync(long chatId, int age)
-        {
-            await setAgeAsync(chatId, age, (int)ChatStages.SetPhoto);
-        }
-        public async Task AddPhotoAsync(long chatId, string photoId)
-        {
-            await setPhotoAsync(chatId, photoId, (int)ChatStages.Menu);
-        }
+        public async Task AddNameAsync(long chatId, string name) => await setNameAsync(chatId, name, (int)ChatStages.SetAge);
+        public async Task AddAgeAsync(long chatId, int age) => await setAgeAsync(chatId, age, (int)ChatStages.SetPhoto);
+        public async Task AddPhotoAsync(long chatId, string photoId) => await setPhotoAsync(chatId, photoId, (int)ChatStages.Menu);
+        public async Task ChangeNameAsync(long chatId, string name) => await setNameAsync(chatId, name, (int)ChatStages.Menu);
+        public async Task ChangeAgeAsync(long chatId, int age) => await setAgeAsync(chatId, age, (int)ChatStages.Menu);
+        public async Task ChangePhotoAsync(long chatId, string photoId) => await setPhotoAsync(chatId, photoId, (int)ChatStages.Menu);
+
         public async Task SetStateAsync(long chatId, int stateId)
         {
             var user = _userRepository.GetFirstByExpression(u => u.TelegramId == chatId);

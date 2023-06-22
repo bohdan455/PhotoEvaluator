@@ -7,6 +7,9 @@ namespace BLL.Services.Interfaces
         Task AddAgeAsync(long chatId, int age);
         Task AddNameAsync(long chatId, string name);
         Task AddPhotoAsync(long chatId, string photoId);
+        Task ChangeAgeAsync(long chatId, int age);
+        Task ChangeNameAsync(long chatId, string name);
+        Task ChangePhotoAsync(long chatId, string photoId);
         Task CreateAsync(long chatId);
         TelegramUser? GetById(long chatId);
         Task<TelegramUser?> GetNextUserToVoteByIdAsync(long chatId);

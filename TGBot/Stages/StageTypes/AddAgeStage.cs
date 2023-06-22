@@ -25,14 +25,10 @@ namespace TGBot.Stages.StageTypes
         {
             var chatId = update.Message!.Chat.Id;
             var textMessage = update.Message.Text;
-            int age;
             if (await _validator.ValidateBotMessageTypeAsync(textMessage, botClient, chatId)) return;
+            int age = await _validator.ValidateAge(textMessage, botClient,chatId);
+            if(age == 0) return;
 
-            if (!int.TryParse(textMessage,out age) || !(1 <= age && age <= 140))
-            {
-                await botClient.SendTextMessageAsync(chatId, "Неправильний формат числа(має бути число в межах (1-140)");
-                return;
-            }
             await _telegramUserService.AddAgeAsync(chatId, age);
             await botClient.SendTextMessageAsync(chatId, $"Тепер надішліть фотографію на оцінку");
         }
