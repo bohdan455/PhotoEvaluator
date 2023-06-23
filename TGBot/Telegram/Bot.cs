@@ -24,12 +24,14 @@ namespace TGBot.Telegram
         private readonly IMiddlewares _middleware;
         private readonly IChatStage _chatStage;
         private readonly ITelegramUserService _telegramUserService;
+        private readonly ILogger<Bot> _logger;
 
-        public Bot(IMiddlewares middleware,IChatStage chatStage,ITelegramUserService telegramUserService)
+        public Bot(IMiddlewares middleware,IChatStage chatStage,ITelegramUserService telegramUserService,ILogger<Bot> logger)
         {
             _middleware = middleware;
             _chatStage = chatStage;
             _telegramUserService = telegramUserService;
+            _logger = logger;
         }
         public void StartReceivingUpdates()
         {
@@ -53,16 +55,24 @@ namespace TGBot.Telegram
             );
             async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
             {
-
-                var chatId = update.Message.Chat.Id;
-                if (update.Message!.Text?.Split(" ")[0] == "/start")
+                try
                 {
-                    await _telegramUserService.CreateAsync(chatId);
-                    await botClient.SendTextMessageAsync(chatId,"Введіть ваше ім'я");
-                    return;
+                    var chatId = update.Message.Chat.Id;
+                    if (update.Message!.Text?.Split(" ")[0] == "/start")
+                    {
+                        await _telegramUserService.CreateAsync(chatId);
+                        await botClient.SendTextMessageAsync(chatId, "Введіть ваше ім'я");
+                        _logger.LogInformation("New user with id {0}", chatId);
+                        return;
+                    }
+                    _middleware.EvaluateStage(chatId);
+
+                    await _chatStage.HandleAsync(botClient, update);
+                }catch (Exception ex)
+                {
+                    _logger.LogError(ex.ToString());
                 }
-                _middleware.EvaluateStage(chatId);
-                await _chatStage.HandleAsync(botClient,update);
+
             }
 
             Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)

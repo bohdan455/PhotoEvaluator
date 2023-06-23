@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TGBot", "TGBot\TGBot.csproj", "{581FED1E-ED51-4CDB-A78C-CEEA0DA32D50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TGBot", "TGBot\TGBot.csproj", "{581FED1E-ED51-4CDB-A78C-CEEA0DA32D50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{7C6A944B-F082-4354-A057-7FF632687AA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resources", "Resources\Resources.csproj", "{7C6A944B-F082-4354-A057-7FF632687AA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{7939DD6F-B3E7-4808-84A7-7A4424BCC032}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{7939DD6F-B3E7-4808-84A7-7A4424BCC032}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{B4B3881D-8148-4517-9773-02BAD9760C8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{B4B3881D-8148-4517-9773-02BAD9760C8F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5EF7ADC4-302D-4B70-AA68-128E5C2EDED0}"
+	ProjectSection(SolutionItems) = preProject
+		dockerfile = dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
